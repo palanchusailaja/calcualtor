@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .calculator {
+            background-color: #eee;
+            border: 2px solid #333;
+            padding: 10px;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: calc(100% - 50px);
+            padding: 5px;
+            font-size: 20px;
+        }
+
+        .clear-button {
+            width: 50px;
+            height: 100%;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #333;
+            color: white;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 23%;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #333;
+            color: white;
+        }
+
+        .equals-button {
+            width: 23%;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #ff5500;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="input-row">
+            <input type="text" id="display" disabled>
+            <button class="clear-button" onclick="clearDisplay()">C</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('+')">+</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('-')">-</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('/')">/</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button class="equals-button" onclick="calculateResult()">=</button>
+            <button onclick="appendToDisplay('*')">*</button>
+        </div>
+    </div>
+    <script>
+        let displayValue = '';
+
+        function appendToDisplay(value) {
+            displayValue += value;
+            document.getElementById('display').value = displayValue;
+        }
+
+        function clearDisplay() {
+            displayValue = '';
+            document.getElementById('display').value = displayValue;
+        }
+
+        function calculateResult() {
+            try {
+                const result = eval(displayValue);
+                document.getElementById('display').value = result;
+                displayValue = result.toString();
+            } catch (error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+
+        // Add code to set focus to the input box when the page loads
+        window.onload = function() {
+            document.getElementById('display').focus();
+        };
+    </script>
+</body>
+</html>
